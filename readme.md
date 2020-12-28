@@ -17,7 +17,7 @@ A flexible **EXPERIMENTAL** Hashing algorithm that uses Neural Network architect
 ### Some Notes
 * *the node activation function is a threshold gate.*
 * *the number of nodes in inputlayer = 2 x no. of nodes in outout layer* 
-* *and those number of nodes changed by user easily thus changing the size of hash generated.(max size = 1024)*
+* *and those number of nodes changed by user easily thus changing the size of hash generated.(max size = 1024 NOTE: 1024 size hash takes a lot of time so be patient when you request for a hash size of 1024)*
 
 ### Requirements
 
