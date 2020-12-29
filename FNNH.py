@@ -139,8 +139,9 @@ def FNNH(data="",hash_size=16,rounds = 64):
 def main():
 
 	stringdata = str(input("Enter the Data for which you want to calculculate the hash : "))
-	sizeofoutput=(input("Enter the size of hash you want to generate (NOTE:max aloted size is 1024) : "))
-	print("Hash of the given data is :",FNNH(stringdata,sizeofoutput))
+	sizeofoutput=int(input("Enter the size of hash you want to generate (NOTE:max aloted size is 1024) : "))
+	rounds = int(input("Enter the number of rounds : "))
+	print("Hash of the given data is :",FNNH(stringdata,sizeofoutput,rounds))
 
 
 if __name__ == "__main__":
