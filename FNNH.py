@@ -12,7 +12,7 @@ def FNNH(data="",hash_size=16,rounds = 64):
 
 	hash_size = the size of hash (Default = 16)
 
-	rounds = the number of rounds per block
+	rounds = the number of rounds per block (Default = 64)
 
 	'''
 
