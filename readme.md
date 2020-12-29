@@ -32,6 +32,7 @@ from FNNH import FNNH
 
 data = "qwerty"
 sizeofhash = 16
+rounds = 64
 
-thehash = FNNH(data,sizeofhash)
+thehash = FNNH(data,sizeofhash,rounds)
 ```

@@ -2,7 +2,7 @@ import numpy as np
 import base64
 
 
-def FNNH(data="",hash_size=16):
+def FNNH(data="",hash_size=16,rounds = 64):
 	'''
 	FNNH(Flexible Neural Network Hash)
 	-----
@@ -11,6 +11,8 @@ def FNNH(data="",hash_size=16):
 	data = the string for which the hash needs to be calculated (Default = "")
 
 	hash_size = the size of hash (Default = 16)
+
+	rounds = the number of rounds per block
 
 	'''
 
@@ -23,6 +25,16 @@ def FNNH(data="",hash_size=16):
 	#convert string to int
 	data = [ord(x) for x in data]
 
+	#rounds check
+	if isinstance(rounds,int)==True:
+		if rounds<=0:
+			print("invalid rounds input.set to default size of 64")
+			rounds=64
+	else:
+		print("invalid data type.hash size set to default size of 16")
+		rounds=64
+
+	#hash size check
 	if isinstance(hash_size,int)==True:
 		if hash_size<=0 and hash_size>1024:
 			print("invalid hash_size input.set to default size of 16")
@@ -97,7 +109,7 @@ def FNNH(data="",hash_size=16):
 	for temp1 in range((len(data)//hash_size)-1):
 
 		#rounds
-		for _ in range(64):
+		for _ in range(rounds):
 
 			temp_hash = np.concatenate((the_hash,data[(temp1*hash_size):((temp1+1)*hash_size)]),axis=None)
 		
