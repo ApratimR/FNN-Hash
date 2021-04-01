@@ -6,7 +6,7 @@ def readme():
     
 setuptools.setup(
     name="FNNH", # Replace with your own username
-    version="0.0.3",
+    version="0.0.4",
     author="Apratim Ray",
     author_email="apratimr55@gmail.com",
     description="A flexible CNN based Hash Function",
