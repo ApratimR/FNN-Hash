@@ -13,7 +13,7 @@ A flexible **EXPERIMENTAL** Hashing algorithm that uses Neural Network architect
 
 ### HOW TO USE
 
-1. drop the python file `FNNH.py` in the same directory of the file you want to use it with.
+1. Run the Command `pip install FNNH` in your python ENV.
 2. and to use the algo write :
 ```python
 from FNNH import FNNH
