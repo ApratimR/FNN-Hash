@@ -72,7 +72,6 @@ def FNNH(data="",hash_size=16,rounds = 64):
 	#sums up all the input layer nodes
 	def sum_with_weight(datainp,pointer):
 		temp_sum = 0
-		maxpointer = 0
 		for temp in datainp:
 			temp_sum = temp_sum + (temp * rnset[pointer])
 			pointer = (pointer + 1)%len(rnset)
@@ -94,12 +93,18 @@ def FNNH(data="",hash_size=16,rounds = 64):
 		data_to_messup = np.roll(data_to_messup,data_to_messup[982]+seed)
 		data_to_messup = (data_to_messup+data_to_messup[269]+seed)%64
 		
+		for temp in range(len(data_to_messup)):
+			data_to_messup[temp] = data_to_messup[temp]^data_to_messup[(temp+1)%len(data_to_messup)]
+   
 		data_to_messup = np.roll(data_to_messup,data_to_messup[1006]+seed)
 		data_to_messup = (data_to_messup+data_to_messup[1017]+seed)%64
-		
+
 		data_to_messup = np.roll(data_to_messup,data_to_messup[849]+seed)
 		data_to_messup = (data_to_messup+data_to_messup[736]+seed)%64
-		
+
+		for temp in range(len(data_to_messup)):
+			data_to_messup[temp] = data_to_messup[temp]^data_to_messup[(temp-1+len(data_to_messup))%len(data_to_messup)]
+
 		data_to_messup = np.roll(data_to_messup,data_to_messup[371]+seed)
 		data_to_messup = (data_to_messup+data_to_messup[599]+seed)%64
 		
