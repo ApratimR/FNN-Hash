@@ -6,7 +6,7 @@ def readme():
     
 setuptools.setup(
     name="FNNH", # Replace with your own username
-    version="0.0.4",
+    version="0.0.5",
     author="Apratim Ray",
     author_email="apratimr55@gmail.com",
     description="A flexible CNN based Hash Function",
@@ -20,8 +20,9 @@ setuptools.setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
-    package_dir={"": "FNNH"},
+    package_dir={"": "src"},
     packages=setuptools.find_packages(where="FNNH"),
+    py_modules=["FNNH"],
     install_requires = ["numpy"],
     python_requires=">=3.6",
 )
