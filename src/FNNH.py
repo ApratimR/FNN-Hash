@@ -2,7 +2,7 @@ import numpy as np
 import base64
 
 
-def FNNH(data="",hash_size=16,rounds = 64):
+def FNNH(data="",hash_size = 16,rounds = 64,returnmode = "string",maxreturnval = 64):
 	'''
 	FNNH(Flexible Neural Network Hash)
 	-----
@@ -14,7 +14,15 @@ def FNNH(data="",hash_size=16,rounds = 64):
 
 	rounds = the number of rounds per block (Default = 64)
 
+	returnmode = the type of data the function will returnt ("string" and "array")
+
+	maxreturnval = if return type in "returnmode" is set the max value of intiger in the array
+
 	'''
+
+	if isinstance(returnmode,str)!=True and returnmode not in ("array","string"):
+		raise Exception("invalid request data type")
+
 
 	data = str(data)
 	data = data.encode(encoding="UTF-8")
@@ -88,25 +96,25 @@ def FNNH(data="",hash_size=16,rounds = 64):
 
 	def rnset_messup(data_to_messup,seed):
 		data_to_messup = np.roll(data_to_messup,data_to_messup[419]+seed)
-		data_to_messup = (data_to_messup+data_to_messup[311]+seed)%64
+		data_to_messup = (data_to_messup+data_to_messup[311]+seed)%maxreturnval
 
 		data_to_messup = np.roll(data_to_messup,data_to_messup[982]+seed)
-		data_to_messup = (data_to_messup+data_to_messup[269]+seed)%64
+		data_to_messup = (data_to_messup+data_to_messup[269]+seed)%maxreturnval
 		
 		for temp in range(len(data_to_messup)):
 			data_to_messup[temp] = data_to_messup[temp]^data_to_messup[(temp+1)%len(data_to_messup)]
    
 		data_to_messup = np.roll(data_to_messup,data_to_messup[1006]+seed)
-		data_to_messup = (data_to_messup+data_to_messup[1017]+seed)%64
+		data_to_messup = (data_to_messup+data_to_messup[1017]+seed)%maxreturnval
 
 		data_to_messup = np.roll(data_to_messup,data_to_messup[849]+seed)
-		data_to_messup = (data_to_messup+data_to_messup[736]+seed)%64
+		data_to_messup = (data_to_messup+data_to_messup[736]+seed)%maxreturnval
 
 		for temp in range(len(data_to_messup)):
 			data_to_messup[temp] = data_to_messup[temp]^data_to_messup[(temp-1+len(data_to_messup))%len(data_to_messup)]
 
 		data_to_messup = np.roll(data_to_messup,data_to_messup[371]+seed)
-		data_to_messup = (data_to_messup+data_to_messup[599]+seed)%64
+		data_to_messup = (data_to_messup+data_to_messup[599]+seed)%maxreturnval
 		
 		return data_to_messup
 
@@ -122,7 +130,7 @@ def FNNH(data="",hash_size=16,rounds = 64):
 
 				weight,pointer = sum_with_weight(temp_hash,pointer)
 
-				if weight%64 <= the_hash[temp2] :
+				if weight%maxreturnval <= the_hash[temp2] :
 					pointer = (pointer+1)%len(rnset)
 					the_hash[temp2]=rnset[pointer]
 					
@@ -138,8 +146,11 @@ def FNNH(data="",hash_size=16,rounds = 64):
 		rnset = rnset_messup(rnset,the_hash[0])
 
 	
-	the_hash_str=strlookup(the_hash)
-	return the_hash_str
+	if returnmode == "string" and maxreturnval==64:
+		the_hash_str=strlookup(the_hash)
+		return the_hash_str
+	elif returnmode == "array":
+		return the_hash
 
 def main():
 
